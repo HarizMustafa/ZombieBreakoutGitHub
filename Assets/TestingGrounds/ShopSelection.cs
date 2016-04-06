@@ -48,7 +48,7 @@ public class ShopSelection : MonoBehaviour {
 
 	void Update () 
 	{
-
+        Money = GameObject.Find("MoneyCarrier").GetComponent<MoneyCarrier>().Money;
 		MoneyTextReference.GetComponent<TextMesh>().text = "RM" + Money;
 
 		if(ShopOpen == true)

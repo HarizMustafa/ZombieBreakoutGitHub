@@ -12,7 +12,7 @@ public class AddButton : Editor
 		RandomSpawn myScript = (RandomSpawn)target;
 		if(GUILayout.Button("Refresh"))
 		{
-			if(myScript.PlayMode == false)
+			if(myScript.StartMode == false)
 			{
 				if(myScript.PortalAmount <= myScript.Portals.Length)
 				myScript.SetRandomNum();

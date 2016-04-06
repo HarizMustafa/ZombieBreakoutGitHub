@@ -3,6 +3,8 @@ using System.Collections;
 
 public class EnemyZombie : MonoBehaviour {
 
+	public float distance;
+
 	Transform target;
 	NavMeshAgent nav;
 	Transform player;
@@ -31,10 +33,12 @@ public class EnemyZombie : MonoBehaviour {
     public bool IAmZombieA;
     public bool IAmZombieB;
     public bool IAmZombieC;
+	public bool IAmZombieD;
 
 	public float ZombieADamage = 5;
 	public float ZombieBDamage = 10;
 	public float ZombieCDamage = 20;
+	public float ZombieDDamage = 15;
 
 	private vp_PlayerEventHandler PlayerEvents = null;
 
@@ -75,6 +79,8 @@ public class EnemyZombie : MonoBehaviour {
             MainDamage = ZombieBDamage;
         if (IAmZombieC)
             MainDamage = ZombieCDamage;
+		if (IAmZombieD)
+			MainDamage = ZombieDDamage;
 
 	}
 
@@ -84,6 +90,8 @@ public class EnemyZombie : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		       
+		distance = Vector3.Distance(transform.position,player.position);
+
 		if(PlayerScriptReferece.PlayerIsDead == true)
 			anim.SetBool("PlayerIsDead", true);
 		
@@ -110,7 +118,13 @@ public class EnemyZombie : MonoBehaviour {
 				
 			}
 		}
-		
+
+		if(distance <= 10)
+		{
+			canAttack = true;
+			nav.stoppingDistance = 2;
+			gameObject.GetComponent<Patrol>().enabled = false;
+		}
     }
 
 
@@ -170,7 +184,7 @@ public class EnemyZombie : MonoBehaviour {
 	{
 		health -= damage;
 
-        if (IAmZombieA || (IAmZombieC) || (IAmZombieB)) {
+        if (IAmZombieA || (IAmZombieC) || (IAmZombieB) || (IAmZombieD)) {
 			anim.SetBool ("EnemyGotHit", true);
 			StartCoroutine (DamageCoolDown ());
 
@@ -231,7 +245,7 @@ public class EnemyZombie : MonoBehaviour {
         capsuleCollider.enabled = false;
         sphereCollider.enabled = false;
 
-        if (IAmZombieA || (IAmZombieC) || (IAmZombieB)) {
+        if (IAmZombieA || (IAmZombieC) || (IAmZombieB) || (IAmZombieD)) {
             anim.SetBool("EnemyStillAlive", false);
 
         }
@@ -269,6 +283,8 @@ public class EnemyZombie : MonoBehaviour {
             ScrManager.KilledZombieB();
         if (IAmZombieC)
             ScrManager.KilledZombieC();
+		if (IAmZombieD)
+			ScrManager.KilledZombieD();
     }
 
 	protected virtual void OnEnable()

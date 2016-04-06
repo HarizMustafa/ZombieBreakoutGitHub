@@ -20,8 +20,10 @@ public class MoneyCarrier : MonoBehaviour {
 	void OnLevelWasLoaded()//this function will run when a new level is loaded
 	{
 
-		MoneyReference = GameObject.Find ("GameManager");
-		Money += MoneyGathered;
+        MoneyReference = GameObject.Find("GameManager");
+        if(Application.loadedLevelName == "Lobby")
+            Money += MoneyGathered;
+
 	}
 
 	// Update is called once per frame

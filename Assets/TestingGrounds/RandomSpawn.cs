@@ -4,7 +4,7 @@ using System.Collections;
 [ExecuteInEditMode]
 public class RandomSpawn : MonoBehaviour {
 
-	public bool PlayMode = false;
+	public bool StartMode = false;
 	public int PortalAmount;
 
 	public GameObject[] Portals;
@@ -17,17 +17,18 @@ public class RandomSpawn : MonoBehaviour {
 
 	void Start () 
 	{
-	
+//		StartMode = true;
+		SpawnStart();
 	}
 
 	void Awake()
 	{
-		PlayMode = true;
+
 	}
 
-	void Update () 
+	void SpawnStart () 
 	{
-		if(PlayMode == false)
+		if(StartMode == false)
 		{
 			RandomNumbers = new int[PortalAmount];
 
@@ -36,8 +37,6 @@ public class RandomSpawn : MonoBehaviour {
 
 			SetRandomLocation();
 		}
-
-
 	}
 
 	public void SetRandomNum()
@@ -98,6 +97,7 @@ public class RandomSpawn : MonoBehaviour {
 			TempVar = RandomNumbers[L] ;
 			Portals[TempVar].SetActive(true);
 		}
+		return;
 	}
 
 //	[System.Serializable]

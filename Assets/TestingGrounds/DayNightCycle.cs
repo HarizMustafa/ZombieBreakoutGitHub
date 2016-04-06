@@ -34,25 +34,15 @@ public class DayNightCycle : MonoBehaviour {
 	
 	void Awake()
 	{
-//		TimeFloat = 24f;
+		
 	}
 
 	void Update () 
 	{
-        //transform.Rotate(new Vector3(0,CycleSpeed*Time.deltaTime));
-		//no need this because there's AutoIntensity to rotate the sun
+        
 		TimeFloat = ((transform.localRotation.eulerAngles.y)/90)*6;
 		CurrentTime = TimeFloat.ToString("0.00");
 
-        /*
-		for(int i = 0; i < DayLightZombieTrigger.Length; i++)
-		{
-			if(TimeFloat >= DayLightZombieTrigger[i].StartEffectAt && DayLightZombieTrigger[i].StartEffectAt + DayLightZombieTrigger[i].EffectDuration >= TimeFloat)
-			{
-				print(DayLightZombieTrigger[i].SayWhat);
-
-			}
-		}*/
 
 		if(TimeFloat >= StarAppearanceTime)
 		{

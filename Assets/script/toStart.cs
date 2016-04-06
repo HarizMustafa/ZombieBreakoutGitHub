@@ -15,6 +15,7 @@ public class toStart : MonoBehaviour {
 	[Space(20)]
 	public GameObject ProgressBarReference;
 	public GameObject LoadingAnimationReference;
+	public GameObject weaponInfo;
 
 	private bool PressedOnce;
 
@@ -38,6 +39,7 @@ public class toStart : MonoBehaviour {
 				MainMenuReference.SetActive (false);
 				LoadingScreenReference.SetActive (true);
 				ControlReference.SetActive (true);
+				StartCoroutine(WeaponInfo());
 				StartCoroutine(LoadALevel(LevelName)); 
 			}
 			else
@@ -70,5 +72,12 @@ public class toStart : MonoBehaviour {
 		async.allowSceneActivation = false;
 		yield return async;
 	}
-	
+
+	private IEnumerator WeaponInfo()
+	{
+		yield return new WaitForSeconds(5);
+		ControlReference.SetActive(false);
+		LoadingScreenReference.GetComponent<TextMesh>().text = "";
+		weaponInfo.SetActive(true);
+	}
 }
